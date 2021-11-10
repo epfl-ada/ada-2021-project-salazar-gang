@@ -30,8 +30,8 @@ Some of the papers and articles that we have read to define these questions and 
 | |Initial analysis (Question 2.)|Jeremy, Laurent, Marwan|
 | |Writing of the README|Gloria|
 |**29th November-5th December**|||
-|**6th-12th December|||
-|**13th-19th December|||
+|**6th-12th December**|||
+|**13th-19th December**|||
 
 
 # Organization within the team
