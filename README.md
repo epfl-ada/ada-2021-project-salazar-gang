@@ -30,6 +30,7 @@ Some of the papers and articles that we have read to define these questions and 
 | |Initial analysis ([Question 2.](#research-questions))|Jeremy, Laurent, Marwan|
 | |Writing of the README|Gloria|
 |**29th November-5th December**|Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change ([Question 3.](#research-questions))|All the team|
+| |Observe political bias regarding climate for each US state based on CO2 emissions|Marwan|
 |**6th-12th December**|Begin the sentiment analysis|Laurent|
 | |Creation of the website for the datastory|Marwan, Gloria|
 | |Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker ([Question 4.](#research-questions))|Jeremy, Laurent|
