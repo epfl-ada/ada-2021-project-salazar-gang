@@ -23,8 +23,12 @@ Some of the papers and articles that we have read to define these questions and 
 |Week|Task|Members involved|
 |----|----|----------------|
 |1-7th November|Definition of project idea|All the team|
-|^^            |Data exploration and preprocess of the data|Jeremy|
-8th-14th November|Write the README|Gloria|
+|   |Data exploration and preprocess of the data|Jeremy|
+| |Data cleaning and further data handling pipelines|Jeremy, Laurent, Gloria|
+|8th-14th November|Identification of key words for climate change|Marwan, Gloria|
+| |Extract quotes for QUoteBank related to climate change (1.)|Jeremy, Laurent|
+| |Initial analysis (2.)|Jeremy, Laurent, Marwan|
+| |Writing of the README|Gloria|
 
 
 # Organization within the team
