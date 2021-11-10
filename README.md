@@ -26,7 +26,7 @@ Some of the papers and articles that we have read to define these questions and 
 |   |Data exploration and preprocess of the data|Jeremy|
 | |Data cleaning and further data handling pipelines|Jeremy, Laurent, Gloria|
 |**8th-14th November**|Identification of key words for climate change|Marwan, Gloria|
-| |Extract quotes for QuoteBank related to climate change ([Question 1.](#Research questions))|Jeremy, Laurent|
+| |Extract quotes for QuoteBank related to climate change ([Question 1.](#research questions))|Jeremy, Laurent|
 | |Initial analysis (Question 2.)|Jeremy, Laurent, Marwan|
 | |Writing of the README|Gloria|
 |**29th November-5th December**|Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change (Question 3.)|All the team|
