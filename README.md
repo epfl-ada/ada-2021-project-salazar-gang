@@ -23,13 +23,13 @@ Some of the papers and articles that we have read to define these questions and 
 
 # Organization within the team
 **Gloria**<br />
-Project description, writing of the README file, research questions definition, web data story and data visualisation.<br />
+    Project description, writing of the README file, research questions definition, web data story and data visualisation.<br />
 **Jeremy**<br /> 
-Preprocess of the data, data cleaning, data handling and data exploration.<br />
+    Preprocess of the data, data cleaning, data handling and data exploration.<br />
 **Laurent**<br />
-Performing the initial analysis, sentiment analysis, implementation of the diverse methods, helps Jeremy on the data handling task.<br />
+    Performing the initial analysis, sentiment analysis, implementation of the diverse methods, helps Jeremy on the data handling task.<br />
 **Marwan**<br />
-Data visualisation with Gloria, realisation of the web datastory, identification of keywords on climate change.<br />
+    Data visualisation with Gloria, realisation of the web datastory, identification of keywords on climate change.<br />
 
 
 # Questions for the TAs
