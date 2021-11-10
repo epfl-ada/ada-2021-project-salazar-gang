@@ -3,7 +3,7 @@
 <p align= "justify"> Nowadays, man-made climate change and global warming have become an emergency that goes far beyond national boundaries and certainly represent one of the greatest challenges humankind has ever faced. In fact, because of direct consequences like heat waves, more frequent and intense storms, rising sea levels, warming of the oceans and many others, humans, but most importantly animals, face new challenges for survival. In order to limit as much as possible the damages, concrete actions need to be undertaken. However, identifying the factors that influence public views on climate change is a crucial step to urge politics to propose solutions on the matter and convince the population to act daily. Furthermore, visibility of the topic in the media is crucial to sensitize the population on the severity of the situation. We therefore decided to first evaluate the occurence of climate change and global warming in the discussed matters on the newspapers. When then analysed the influence of the social context (age, academic degree, profession, political party…) on the opinions of climate change using the QuoteBank dataset to answer several questions listed below.</p>
 
 # Research questions
-1.	How much is climate change mentioned in the news ? 
+<a name="Question 1">1.	How much is climate change mentioned in the news ?</a>
 2.	Does the occurrence of the matter in quotes increase among the years? Does it correlate with the aggravation of climate change ?
 3.	Who talks the most about climate change ?
 4.	Does the political party influence the views on climate change ? And what about the academic degree ? And the age ?
@@ -26,7 +26,7 @@ Some of the papers and articles that we have read to define these questions and 
 |   |Data exploration and preprocess of the data|Jeremy|
 | |Data cleaning and further data handling pipelines|Jeremy, Laurent, Gloria|
 |**8th-14th November**|Identification of key words for climate change|Marwan, Gloria|
-| |Extract quotes for QuoteBank related to climate change (Question 1.)|Jeremy, Laurent|
+| |Extract quotes for QuoteBank related to climate change ([Question 1.](#Question 1))|Jeremy, Laurent|
 | |Initial analysis (Question 2.)|Jeremy, Laurent, Marwan|
 | |Writing of the README|Gloria|
 |**29th November-5th December**|Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change (Question 3.)|All the team|
