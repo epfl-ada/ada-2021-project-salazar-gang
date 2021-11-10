@@ -23,7 +23,7 @@ Some of the papers and articles that we have read to define these questions and 
 |Week|Task|Members involved|
 -----|----|----------------|
 1-7th November|Definition of project idea|All the team|
-|Data exploration and preprocess of the data|Jeremy|
+              |Data exploration and preprocess of the data|Jeremy|
 8th-14th November|Write the README|Gloria|
 
 
