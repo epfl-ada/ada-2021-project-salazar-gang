@@ -23,7 +23,7 @@ Some of the papers and articles that we have read to define these questions and 
 
 # Organization within the team
 **Gloria**<br />
-**Jeremy**<br />
+**Jeremy**<br /> 
 **Laurent**<br />
 **Marwan**<br />
 # Questions for the TAs
