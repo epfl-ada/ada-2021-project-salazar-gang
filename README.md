@@ -18,6 +18,8 @@ Some of the papers and articles that we have read to define these questions and 
 # Proposed additional datasets
 
 # Methods
+**Sorting out quotes based on topic:**<br />
+In order to sort the quotes to get only those speaking about climate change, the best method is to search quotes by keywords (climate change, global warming, etc..). Topic classification using machine learning methods is not useful because we will surely get quotes that are completely irrelevant for climate change.
 
 # Proposed timeline and internal milestones
 |**Week**|**Task**|**Members involved**|
