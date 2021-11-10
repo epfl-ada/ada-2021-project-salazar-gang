@@ -4,7 +4,7 @@
 
 # Research questions
 1.	How much is climate change mentioned in the news? 
-2.	Did the occurrence of the topic increase among the years?
+2.	Does the occurrence of the topic correlate with the worsening of climate change and global warning through the years?
 3.	Who talks the most about climate change?
 4.	Does the political party influence the views on climate change? And what about the academic degree ? And the age ?
 5.	Do scientists and politicians agree?
