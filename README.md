@@ -34,7 +34,7 @@ Some of the papers and articles that we have read to define these questions and 
 | |Creation of the website for the datastory|Marwan, Gloria|
 | |Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker (Question 4.)|Jeremy, Laurent|
 | |Do politicians and scientists agree ? (Question 5.)|Jeremy, Laurent|
-|**13th-19th December**|Conclude and resume findings|All the team|
+|**13th-17th December**|Conclude and resume findings|All the team|
 | |Finish datastory|Gloria, Marwan|
 | |Update README|Gloria|
 
