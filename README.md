@@ -10,7 +10,7 @@
 5.	Do scientists and politicians agree?
 
 Some of the papers and articles that we have read to define these questions and get inspiration are listed below:<br />
-    - [Climate change, cultural cognition, and media effects: Worldviews drive news selectivity, biased processing, and polarized attitudes](https://doi.org/10.1177%2F0963662518801170)<br />
+    - <p align= "justify">[Climate change, cultural cognition, and media effects: Worldviews drive news selectivity, biased processing, and polarized attitudes]</p>(https://doi.org/10.1177%2F0963662518801170)<br />
     - [Analysis: The UK politicians who talk the most about climate change](https://www.carbonbrief.org/analysis-the-uk-politicians-who-talk-the-most-about-climate-change)<br />
     - [The Politics of Climate](https://www.pewresearch.org/internet/wp-content/uploads/sites/9/2016/10/PS_2016.10.04_Politics-of-Climate_FINAL.pdf)<br />
     - [Democratic and Republican Views of Climate Change (2018)](https://climatecommunication.yale.edu/visualizations-data/partisan-maps-2018/)<br />
