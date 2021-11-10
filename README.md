@@ -22,7 +22,7 @@ Some of the papers and articles that we have read to define these questions and 
 # Proposed timeline
 |**Week**|**Task**|**Members involved**|
 |----|----|----------------|
-|**1-7th November**|Definition of project idea|All the team|
+|**1st-7th November**|Definition of project idea|All the team|
 |   |Data exploration and preprocess of the data|Jeremy|
 | |Data cleaning and further data handling pipelines|Jeremy, Laurent, Gloria|
 |**8th-14th November**|Identification of key words for climate change|Marwan, Gloria|
