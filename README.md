@@ -19,7 +19,7 @@ Some of the papers and articles that we have read to define these questions and 
 
 # Methods
 
-# Proposed timeline
+# Proposed timeline and tasks assignement
 |**Week**|**Task**|**Members involved**|
 |----|----|----------------|
 |**1st-7th November**|Definition of project idea|All the team|
@@ -29,17 +29,20 @@ Some of the papers and articles that we have read to define these questions and 
 | |Extract quotes for QuoteBank related to climate change (Question 1.)|Jeremy, Laurent|
 | |Initial analysis (Question 2.)|Jeremy, Laurent, Marwan|
 | |Writing of the README|Gloria|
+|**29th November-5th December**|||
+|**6th-12th December|||
+|**13th-19th December|||
 
 
 # Organization within the team
 **Gloria**<br />
-    Project description, writing of the README file, research questions definition, web data story and data visualisation.<br />
+    Project description, writing of the README file, research questions definition, web datastory and data visualisation.<br />
 **Jeremy**<br /> 
-    Preprocess of the data, data cleaning, data handling and data exploration.<br />
+    Preprocess of the data, data cleaning, data handling, data exploration and general coding.<br />
 **Laurent**<br />
-    Performing the initial analysis, sentiment analysis, implementation of the diverse methods, helps Jeremy on the data handling task.<br />
+    Performing of the initial analysis, sentiment analysis, implementation of the diverse methods, helps Jeremy on the data handling task.<br />
 **Marwan**<br />
-    Data visualisation with Gloria, realisation of the web datastory, identification of keywords on climate change.<br />
+    Identification of keywords on climate change, data visualisation with Gloria, realisation of the web datastory.<br />
 
 
 # Questions for the TAs
