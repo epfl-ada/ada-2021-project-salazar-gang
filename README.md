@@ -16,7 +16,7 @@ Some of the papers and articles that we have read to define these questions and 
     - [Democratic and Republican Views of Climate Change (2018)](https://climatecommunication.yale.edu/visualizations-data/partisan-maps-2018/)<br />
 
 # Proposed additional datasets
-To complete the [second task planed from the 29th November-5th December](#proposed-timeline-and-internal-milestones), we 
+To complete the [second task planed from the 29th November-5th December](#proposed-timeline-and-internal-milestones).
 
 # Methods
 
