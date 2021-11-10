@@ -22,8 +22,8 @@ Some of the papers and articles that we have read to define these questions and 
 # Proposed timeline
 
 # Organization within the team
-**Gloria**;
-**Jeremy**;
-**Laurent**;
-**Marwan**;
+**Gloria**<br />
+**Jeremy**<br />
+**Laurent**<br />
+**Marwan**<br />
 # Questions for the TAs
