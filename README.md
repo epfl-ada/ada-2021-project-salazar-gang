@@ -16,7 +16,6 @@ Some of the papers and articles that we have read to define these questions and 
     - [Democratic and Republican Views of Climate Change (2018)](https://climatecommunication.yale.edu/visualizations-data/partisan-maps-2018/)<br />
 
 # Proposed additional datasets
-To complete the [second task planed from the 29th November-5th December](#proposed-timeline-and-internal-milestones).
 
 # Methods
 
@@ -31,7 +30,6 @@ To complete the [second task planed from the 29th November-5th December](#propos
 | |3.Initial analysis ([Question 2.](#research-questions))|Jeremy, Laurent, Marwan|
 | |4.Writing of the README|Gloria|
 |**29th November-5th December**|1.Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change ([Question 3.](#research-questions))|All the team|
-| |2.Observe political bias regarding climate for each US state based on CO2 emissions|Marwan|
 |**6th-12th December**|1.Begin the sentiment analysis|Laurent|
 | |2.Creation of the website for the datastory|Marwan, Gloria|
 | |3.Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker ([Question 4.](#research-questions))|Jeremy, Laurent|
