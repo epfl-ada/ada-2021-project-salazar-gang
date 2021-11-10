@@ -19,7 +19,7 @@ Some of the papers and articles that we have read to define these questions and 
 
 # Methods
 
-# Proposed timeline and tasks assignement
+# Proposed timeline and internal milestones
 |**Week**|**Task**|**Members involved**|
 |----|----|----------------|
 |**1st-7th November**|Definition of project idea|All the team|
@@ -29,9 +29,14 @@ Some of the papers and articles that we have read to define these questions and 
 | |Extract quotes for QuoteBank related to climate change (Question 1.)|Jeremy, Laurent|
 | |Initial analysis (Question 2.)|Jeremy, Laurent, Marwan|
 | |Writing of the README|Gloria|
-|**29th November-5th December**|||
-|**6th-12th December**|||
-|**13th-19th December**|||
+|**29th November-5th December**|Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change (Question 3.)|All the team|
+|**6th-12th December**|Begin the sentiment analysis|Laurent|
+| |Creation of the website for the datastory|Marwan, Gloria|
+| |Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker (Question 4.)|Jeremy, Laurent|
+| |Do politicians and scientists agree ? (Question 5.)|Jeremy, Laurent|
+|**13th-19th December**|Conclude and resume findings|All the team|
+| |Finish datastory|Gloria, Marwan|
+| |Update README|Gloria|
 
 
 # Organization within the team
