@@ -22,22 +22,22 @@ Some of the papers and articles that we have read to define these questions and 
 # Proposed timeline and internal milestones
 |**Week**|**Task**|**Members involved**|
 |----|----|----------------|
-|**1st-7th November**|Definition of project idea|All the team|
-|   |Data exploration and preprocess of the data|Jeremy|
-| |Data cleaning and further data handling pipelines|Jeremy, Laurent, Gloria|
-|**8th-14th November**|Identification of key words for climate change|Marwan, Gloria|
-| |Extract quotes for QuoteBank related to climate change ([Question 1.](#research-questions))|Jeremy, Laurent|
-| |Initial analysis ([Question 2.](#research-questions))|Jeremy, Laurent, Marwan|
-| |Writing of the README|Gloria|
-|**29th November-5th December**|Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change ([Question 3.](#research-questions))|All the team|
-| |Observe political bias regarding climate for each US state based on CO2 emissions|Marwan|
-|**6th-12th December**|Begin the sentiment analysis|Laurent|
-| |Creation of the website for the datastory|Marwan, Gloria|
-| |Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker ([Question 4.](#research-questions))|Jeremy, Laurent|
-| |Do politicians and scientists agree ? ([Question 5.](#research-questions))|Jeremy, Laurent|
+|**1st-7th November**|1.Definition of project idea|All the team|
+|   |2.Data exploration and preprocess of the data|Jeremy|
+| |3.Data cleaning and further data handling pipelines|Jeremy, Laurent, Gloria|
+|**8th-14th November**|1.Identification of key words for climate change|Marwan, Gloria|
+| |2.Extract quotes for QuoteBank related to climate change ([Question 1.](#research-questions))|Jeremy, Laurent|
+| |3.Initial analysis ([Question 2.](#research-questions))|Jeremy, Laurent, Marwan|
+| |4.Writing of the README|Gloria|
+|**29th November-5th December**|1.Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change ([Question 3.](#research-questions))|All the team|
+| |2.Observe political bias regarding climate for each US state based on CO2 emissions|Marwan|
+|**6th-12th December**|1.Begin the sentiment analysis|Laurent|
+| |2.Creation of the website for the datastory|Marwan, Gloria|
+| |3.Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker ([Question 4.](#research-questions))|Jeremy, Laurent|
+| |4.Do politicians and scientists agree ? ([Question 5.](#research-questions))|Jeremy, Laurent|
 |**13th-17th December**|Conclude and resume findings|All the team|
-| |Finish datastory|Gloria, Marwan|
-| |Update README|Gloria|
+| |1.Finish datastory|Gloria, Marwan|
+| |2.Update README|Gloria|
 
 
 # Organization within the team
