@@ -22,7 +22,9 @@ Some of the papers and articles that we have read to define these questions and 
 # Proposed timeline
 |Week|Task|Members involved|
 -----|----|----------------|
-Week 7: 1-7th November|Brainstroming and definition of project idea|All the team|
+1-7th November|Definition of project idea|All the team|
+|Data exploration and preprocess of the data|Jeremy|
+8th-14th November|Write the README|Gloria|
 
 
 # Organization within the team
