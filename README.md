@@ -27,13 +27,13 @@ Some of the papers and articles that we have read to define these questions and 
 | |Data cleaning and further data handling pipelines|Jeremy, Laurent, Gloria|
 |**8th-14th November**|Identification of key words for climate change|Marwan, Gloria|
 | |Extract quotes for QuoteBank related to climate change ([Question 1.](#research-questions))|Jeremy, Laurent|
-| |Initial analysis (Question 2.)|Jeremy, Laurent, Marwan|
+| |Initial analysis ([Question 2.](#research-questions))|Jeremy, Laurent, Marwan|
 | |Writing of the README|Gloria|
-|**29th November-5th December**|Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change (Question 3.)|All the team|
+|**29th November-5th December**|Sort the identified climate quotes based on the profession of the speaker and evaluate what are the top professions talking about climate change ([Question 3.](#research-questions))|All the team|
 |**6th-12th December**|Begin the sentiment analysis|Laurent|
 | |Creation of the website for the datastory|Marwan, Gloria|
-| |Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker (Question 4.)|Jeremy, Laurent|
-| |Do politicians and scientists agree ? (Question 5.)|Jeremy, Laurent|
+| |Finish sentiment analysis and evaluate the influence of political party, age and academic degree of speaker ([Question 4.](#research-questions))|Jeremy, Laurent|
+| |Do politicians and scientists agree ? ([Question 5.](#research-questions))|Jeremy, Laurent|
 |**13th-17th December**|Conclude and resume findings|All the team|
 | |Finish datastory|Gloria, Marwan|
 | |Update README|Gloria|
