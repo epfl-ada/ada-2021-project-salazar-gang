@@ -20,6 +20,10 @@ Some of the papers and articles that we have read to define these questions and 
 # Methods
 
 # Proposed timeline
+|Week|Task|Members involved|
+-----|----|----------------|
+Week 7: 1-7th November|Brainstroming and definition of project idea|All the team|
+
 
 # Organization within the team
 **Gloria**<br />
