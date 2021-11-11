@@ -22,6 +22,9 @@ None for the moment.
 **Sorting out quotes based on topic:**<br />
 <p align= "justify"> In order to sort the quotes to get only those speaking about climate change, the best method is to search quotes by keywords (climate change, global warming, etc..). Topic classification using machine learning methods is not useful because we will surely get quotes that are completely irrelevant for climate change.</p>
 
+**Sentiment analysis:**<br />
+<p align= "justify"> Once the dataset is sorted out, we are interested to see whether the quotes are positive or negative about climate change. This method will lead to a better interpretation of the blablabla</p>
+
 # Proposed timeline and internal milestones
 |**Week**|**Task**|**Members involved**|
 |----|----|----------------|
