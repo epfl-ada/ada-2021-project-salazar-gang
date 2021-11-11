@@ -16,6 +16,7 @@ Some of the papers and articles that we have read to define these questions and 
     - [Democratic and Republican Views of Climate Change (2018)](https://climatecommunication.yale.edu/visualizations-data/partisan-maps-2018/)<br />
 
 # Proposed additional datasets
+None for the moment.
 
 # Methods
 **Sorting out quotes based on topic:**<br />
