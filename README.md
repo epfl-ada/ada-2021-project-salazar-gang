@@ -16,8 +16,10 @@ Some of the papers and articles that we have read to define these questions and 
     - [Democratic and Republican Views of Climate Change (2018)](https://climatecommunication.yale.edu/visualizations-data/partisan-maps-2018/)<br />
 
 # Proposed additional datasets
-<p align= "justify">The informations about the frequency of research of a certain topic on google will be retrieved using Google Trends. It will give informations about the influence of the social media on the population.</p>
-
+**Wikidata**
+<p align= "justify"> Wikipedia data are used in order to retrieve some attributes about the speakers. We fetch and add these attributes to the quotations data in order to perform further analysis. Speaker occupation, academic degree and birth date are some examples of attributes that we will use.</p>
+**Google Trends**
+<p align= "justify"> The informations about the frequency of research of a certain topic on google will be retrieved using Google Trends. It will give informations about the influence of the media on the population. It will be useful to correlate the quotation occurrences and the google search occurrences of climate change topics for our analysis.</p>
 # Methods
 **Sorting out quotes based on topic:**<br />
 <p align= "justify"> In order to sort the quotes to get only those speaking about climate change, the best method is to search quotes by keywords. We selected the following keywords to perform the analysis:
