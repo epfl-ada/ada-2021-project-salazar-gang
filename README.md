@@ -16,7 +16,7 @@ Some of the papers and articles that we have read to define these questions and 
     - [Democratic and Republican Views of Climate Change (2018)](https://climatecommunication.yale.edu/visualizations-data/partisan-maps-2018/)<br />
 
 # Proposed additional datasets
-<p align= "justify">The informations about the frequency of research of a certain topic on google will be retrieved using **Google Trends**. It will give informations about the influence of the social media on the population.</p>
+<p align= "justify">The informations about the frequency of research of a certain topic on google will be retrieved using Google Trends. It will give informations about the influence of the social media on the population.</p>
 
 # Methods
 **Sorting out quotes based on topic:**<br />
