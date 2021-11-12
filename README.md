@@ -20,7 +20,7 @@ Some of the papers and articles that we have read to define these questions and 
 
 # Methods
 **Sorting out quotes based on topic:**<br />
-<p align= "justify"> In order to sort the quotes to get only those speaking about climate change, the best method is to search quotes by keywords. We selected the following keyword to perform the analysis:
+<p align= "justify"> In order to sort the quotes to get only those speaking about climate change, the best method is to search quotes by keywords. We selected the following keywords to perform the analysis:
  
 - [x] Climate change
 - [x] Global warming
@@ -30,13 +30,14 @@ Some of the papers and articles that we have read to define these questions and 
 - [x] Sea level rise
 - [x] CO2 emissions, Carbone dioxyde emissions  
     
+This list isn't fixed and might change during milestone 3. 
 Topic classification using machine learning methods is not useful because we will surely get quotes that are completely irrelevant for climate change.</p>
 
 **Sentiment analysis:**<br />
 <p align= "justify"> Once the dataset is sorted out, we are interested to see whether the quotes are positive or negative about climate change. This method will lead hopefuly to a better interpretation of the perception of climate change by the speakers. There are multiple pre-trained sentiment analysis model that are available on https://huggingface.co/ and we will need to test them to achieve the best possible accuracy. We think that sentiment analysis on such negative topic like climate change will probably fail to determine the opinion of the speaker about this kind of topic but we will still give it a try.</p>
 
 **Quotebank and wikidata:**<br />
-<p align= "justify"> The personal informations about the speakers are essential to perform statistical anaylsis. Thus, the important informations such as the age, the nationality, the gender, etc.. are retrieved from the wikidata and added to the quotebank dataframe corresponding to the qid of the speaker.</p>
+<p align= "justify"> The personal informations about the speakers are essential to perform statistical anaylsis. Thus, the important informations such as the the nationality, the gender, etc.. are retrieved from the wikidata and added to the quotebank dataframe corresponding to the qid of the speaker. the age of the speaker is calculated by substracting the citation date with the birth date.</p>
 
 
 # Proposed timeline and internal milestones
