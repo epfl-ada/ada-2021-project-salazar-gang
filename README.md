@@ -21,6 +21,7 @@ Some of the papers and articles that we have read to define these questions and 
 
 **Google Trends**
 <p align= "justify"> The informations about the frequency of research of a certain topic on google will be retrieved using Google Trends. It will give informations about the influence of the media on the population. It will be useful to correlate the quotation occurrences and the google search occurrences of climate change topics for our analysis.</p>
+
 # Methods
 **Sorting out quotes based on topic:**<br />
 <p align= "justify"> In order to sort the quotes to get only those speaking about climate change, the best method is to search quotes by keywords. We selected the following keywords to perform the analysis:
