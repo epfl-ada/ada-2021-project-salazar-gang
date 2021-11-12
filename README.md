@@ -22,13 +22,13 @@ Some of the papers and articles that we have read to define these questions and 
 **Sorting out quotes based on topic:**<br />
 <p align= "justify"> In order to sort the quotes to get only those speaking about climate change, the best method is to search quotes by keywords. We selected the following keyword to perform the analysis:
  
-[x] Climate change
-[x] Global warming
-[x] Greenhouse effect
-[x] Greenhouse gas
-[x] Sustainibility
-[x] Sea level rise
-[x] CO2 emissions, Carbone dioxyde emissions  
+- [x] Climate change
+- [x] Global warming
+- [x] Greenhouse effect
+- [x] Greenhouse gas
+- [x] Sustainibility
+- [x] Sea level rise
+- [x] CO2 emissions, Carbone dioxyde emissions  
     
 Topic classification using machine learning methods is not useful because we will surely get quotes that are completely irrelevant for climate change.</p>
 
