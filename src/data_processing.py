@@ -70,7 +70,7 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
     '''
     Add the speakers attributes to the DataFrame df provided and return the result.
     Note: speaker_attributes.parquet (from the provided Drive from ADA course) must be in the folder ../Datasets/ to use add_speakers_attributes function.
-    :param df: [optional, DataFrame] DataFrame containing the quotes
+    :param df: [DataFrame] DataFrame containing the quotes
     :param save_mode: [bool, optional] save the new DataFrame in save_filename
     :param save_filename: [string, optional] filename for the save of the DataFrame
     :return: [DataFrame] processed DataFrame with the quotes containing the speakers attributes
@@ -172,5 +172,18 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
     return df
 
 
-df = pd.read_pickle("../../Project_perso/quotations_climate_change_example.pkl")
-add_speakers_attributes(df)
+def get_label_from_QID(QID):
+    '''
+    Get the label (string) associated with a QID
+    :param QID: [string] QID
+    :return: [string] <label of QID> or <QID> if label not found
+    '''
+    qids = pd.read_pickle("../Datasets/qids.pkl")
+    label = qids[qids.QID==QID]
+    if label.shape[0] == 0:
+        return QID
+    else:
+        return label.iloc[0]['Label']
+
+
+
