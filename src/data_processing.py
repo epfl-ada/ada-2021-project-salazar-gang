@@ -8,6 +8,7 @@ import bz2
 import pandas as pd
 import numpy as np
 from transformers import pipeline
+from print_overloading import save_print
 
 
 def keywords_search(keywords=None, df=None, save_mode=False, save_filename=None):
@@ -390,7 +391,26 @@ def create_climate_quotes():
         print("add_speakers_attributes densities: ERROR")
 
 
+def sentiment_analysis_topic_classification():
+    '''
+    This function is used to perform topic classification on the quotes. It has been used for tests but it's unfortunately not implemeneted in the main notebook.
+    '''
+    try:
+        df = pd.read_pickle("../Datasets/quotes-climate_v2.pkl")
+        add_sentiment_analysis(df, model_name="facebook/bart-large-mnli", classifier_parameters=[["pessimism","optimism"]], save_mode=True, save_filename="quotes_sa3_1.pkl")
+        print("add_sentiment_analysis (1): GOOD")
+    except:
+        print("add_sentiment_analysis (1): ERROR")
+    try:
+        df = pd.read_pickle("quotes_speakers.pkl")
+        add_sentiment_analysis(df, model_name="facebook/bart-large-mnli", classifier_parameters=[["conservative","progressive"]], save_mode=True, save_filename="quotes_sa3_2.pkl")
+        print("add_sentiment_analysis (2): GOOD")
+    except:
+        print("add_sentiment_analysis (2): ERROR")
+
+
 if __name__ =='__main__':
+    save_print()
     create_climate_quotes()
 
 
