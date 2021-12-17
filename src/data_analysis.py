@@ -45,6 +45,12 @@ def get_label_from_QID(QID):
 
 
 def keep_only_first_speaker(df):
+    '''
+    This function remove the quotes where the speaker is not exactly known.
+    Indeed, some quotes are attributed to a name but several personalities have the same name therefore we can't attribute properly the quote.
+    :param df: [DataFrame] initial dataframe
+    :return: [DataFrame] final dataframe containing only 'resolved' quotes
+    '''
     df = df[df['speaker_type'].str.len()==1]
     return df
 
