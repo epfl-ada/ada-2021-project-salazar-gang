@@ -184,6 +184,7 @@ def compute_sentiment_analysis(quotes, model_name="distilbert-base-uncased-finet
     :return: predictions from the model
     '''
     pd.options.mode.chained_assignment = None  # default='warn'
+    # load the classifier depending on the model wanted
     if model_name == "distilbert-base-uncased-finetuned-sst-2-english":
         classifier = pipeline("text-classification", model=model_name, return_all_scores=True)
     elif model_name == "bhadresh-savani/distilbert-base-uncased-emotion":
@@ -195,6 +196,7 @@ def compute_sentiment_analysis(quotes, model_name="distilbert-base-uncased-finet
         warnings.warn("Sentiment analysis model unknown !")
         classifier = pipeline("text-classification", model=model_name, return_all_scores=True)
 
+    # get the labels list returned by the model
     pred = classifier(["labels wanted !"], *classifier_parameters)
     if type(pred[0]) is dict:
         if pred[0].get('labels') != None:
@@ -204,14 +206,17 @@ def compute_sentiment_analysis(quotes, model_name="distilbert-base-uncased-finet
         label = pred[0][l]['label']
         labels.append(label)
 
+    # predictions
     prediction = []
     for i in range(len(quotes)):
         quote = quotes[i]
+        # try to make a prediction
         try:
             pred = classifier([quote], *classifier_parameters)
             if type(pred[0]) is dict:
                 if pred[0].get('labels') != None:
                     pred = [[{'label': pred[0]['labels'][i], 'score': pred[0]['scores'][i]} for i in range(len(pred[0]['labels']))]]
+        # if the prediction fails or can't be made (example: too long quote), then np.nan is returned for the scores
         except:
             pred = [[]]
             for label in labels:
@@ -233,11 +238,13 @@ def add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst
     pd.options.mode.chained_assignment = None  # default='warn'
     if os.path.isdir("sa_checkpoints") is False: os.mkdir("sa_checkpoints")
 
+    # initialize the labels columns
     prediction = compute_sentiment_analysis(["labels wanted !"], model_name=model_name, classifier_parameters=classifier_parameters)
     for l in range(len(prediction[0])):
         label = "sa_" + prediction[0][l]['label'].lower()
         df[label] = np.nan
 
+    # sentiment analysis by chunk
     t0 = time.time()
     t_delta = t0
     chunksize = 10000
@@ -247,6 +254,7 @@ def add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst
         if max_bound > df.shape[0]: max_bound = df.shape[0]
         quotes = df.iloc[min_bound:max_bound]['quotation'].values
         quotes = quotes.tolist()
+        # predictions for the quotes
         prediction = compute_sentiment_analysis(quotes, model_name=model_name, classifier_parameters=classifier_parameters)
         for q in range(len(prediction)):
             for l in range(len(prediction[q])):
@@ -254,10 +262,12 @@ def add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst
                 proba = prediction[q][l]['score']
                 df[label].iat[min_bound+q] = proba
         print(f"Number of quotes processed with sentiment analysis: {max_bound}/{df.shape[0]} ({round(time.time()-t0,2)} sec)")
+        # save the DataFrame each hour (checkpoints)
         if save_mode and time.time()-t_delta>3600:
             t_delta = time.time()
             timestamp = str(datetime.datetime.now()).replace(' ', '_').replace(':', 'h')[:16]
             df.to_pickle(f"../Datasets/sa_checkpoints/quotes_sa_checkpoint_{timestamp}.pkl")
+    # save of the final DataFrame
     if save_mode:
         df.to_pickle("../Datasets/"+save_filename)
     return df
@@ -367,19 +377,23 @@ def create_climate_quotes():
     '''
     pd.options.mode.chained_assignment = None  # default='warn'
     keywords = {"climate change", "global warming", "greenhouse effect", "greenhouse gas", "climate crisis", "climate emergency", "climate breakdown"}
+    # keywords search to sort the quotes
     try:
         keywords_search(keywords=keywords, save_mode=True, save_filename="quotes1_keywords.pkl")
         print("keywords_search: GOOD")
     except:
         print("keywords_search: ERROR")
+    # add speaker attributes to the quotes (from speaker_attributes.parquet)
     try:
         df = pd.read_pickle("../Datasets/quotes1_keywords.pkl")
         add_speakers_attributes(df, save_mode=True, save_filename="quotes2_speakers.pkl")
         print("add_speakers_attributes: GOOD")
     except:
         print("add_speakers_attributes: ERROR")
+    # find the useful QIDS and save the list
     df = pd.read_pickle("../Datasets/quotes2_speakers.pkl")
     find_qids(df)
+    # sentiment analysis 1: positive/negative quotes
     try:
         df = pd.read_pickle("../Datasets/quotes2_speakers.pkl")
         add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst-2-english", save_mode=True, save_filename="quotes3_sa1.pkl")
@@ -389,6 +403,7 @@ def create_climate_quotes():
     df = pd.read_pickle("../Datasets/quotes3_sa1.pkl")
     df['sa_score'] = df[['sa_negative', 'sa_positive']].idxmax(axis=1).str[3:]
     df.to_pickle("../Datasets/quotes3_sa1.pkl")
+    # sentiment analysis 2: emotions from quotes (joy, love, anger, fear, sadness, surprise)
     try:
         df = pd.read_pickle("../Datasets/quotes3_sa1.pkl")
         add_sentiment_analysis(df, model_name="bhadresh-savani/distilbert-base-uncased-emotion", save_mode=True, save_filename="quotes4_sa.pkl")
@@ -399,11 +414,13 @@ def create_climate_quotes():
     df['sa_emotion'] = df[['sa_sadness', 'sa_joy', 'sa_love', 'sa_anger', 'sa_fear', 'sa_surprise']].idxmax(axis=1).str[3:]
     df.to_pickle("../Datasets/quotes-climate_v2.pkl")
 
+    # get the number of quotes (not) related to climate for each speaker
     try:
         get_quotes_per_speaker(keywords, debug=True, save_mode=True, save_filename="quotes_densities.pkl")
         print("get_quotes_per_speaker: GOOD")
     except:
         print("get_quotes_per_speaker: ERROR")
+    # add speaker attributes to the DataFrame computed above -> useful to plot percentage of quotes per characteristic
     try:
         df = pd.read_pickle("../Datasets/quotes_densities.pkl")
         add_speakers_attributes(df, save_mode=True, save_filename="quotes_densities_speakers.pkl")
@@ -417,6 +434,7 @@ def sentiment_analysis_topic_classification():
     This function is used to perform topic classification on the quotes. It has been used for tests but it's unfortunately not implemeneted in the main notebook.
     This function classify quotations with labels ["pessimism","optimism"] and labels ["conservative","progressive"]
     '''
+    # Not used in the final model and the final notebook because it's very long to run and it's not possible to run it on the full dataset. However it would have been interesting to use.
     try:
         df = pd.read_pickle("../Datasets/quotes-climate_v2.pkl")
         add_sentiment_analysis(df, model_name="facebook/bart-large-mnli", classifier_parameters=[["pessimism","optimism"]], save_mode=True, save_filename="quotes_sa3_1.pkl")
