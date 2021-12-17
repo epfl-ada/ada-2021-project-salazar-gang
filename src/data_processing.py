@@ -342,11 +342,6 @@ def find_qids(df):
     QIDS_useful.to_pickle("../Datasets/qids.pkl")
 
 
-def keep_only_first_speaker(df):
-    df = df[df['speaker_type'].str.len()==1]
-    return df
-
-
 def create_climate_quotes():
     pd.options.mode.chained_assignment = None  # default='warn'
     keywords = {"climate change", "global warming", "greenhouse effect", "greenhouse gas", "climate crisis", "climate emergency", "climate breakdown"}
@@ -380,7 +375,7 @@ def create_climate_quotes():
         print("add_sentiment_analysis (2): ERROR")
     df = pd.read_pickle("../Datasets/quotes4_sa.pkl")
     df['sa_emotion'] = df[['sa_sadness', 'sa_joy', 'sa_love', 'sa_anger', 'sa_fear', 'sa_surprise']].idxmax(axis=1).str[3:]
-    df.to_pickle("../Datasets/quotes4_sa.pkl")
+    df.to_pickle("../Datasets/quotes-climate_v2.pkl")
 
     try:
         get_quotes_per_speaker(keywords, debug=True, save_mode=True, save_filename="quotes_densities.pkl")

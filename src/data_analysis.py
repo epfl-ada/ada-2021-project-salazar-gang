@@ -8,6 +8,7 @@ import bz2
 import pandas as pd
 import numpy as np
 
+
 def find_keywords_in_label(df, label="speaker_occupation", keywords=['researcher']):
     '''
     Return a reduced version of "df" where "df[label]" contains (at least) one keyword from "keywords"
@@ -28,6 +29,7 @@ def find_keywords_in_label(df, label="speaker_occupation", keywords=['researcher
     df_keyworded = df[mask]
     return df_keyworded
 
+
 def get_label_from_QID(QID):
     '''
     Get the label (string) associated with a QID
@@ -40,6 +42,12 @@ def get_label_from_QID(QID):
         return QID
     else:
         return label.iloc[0]['Label']
+
+
+def keep_only_first_speaker(df):
+    df = df[df['speaker_type'].str.len()==1]
+    return df
+
 
 
 
