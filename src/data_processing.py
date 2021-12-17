@@ -172,18 +172,6 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
     return df
 
 
-def get_label_from_QID(QID):
-    '''
-    Get the label (string) associated with a QID
-    :param QID: [string] QID
-    :return: [string] <label of QID> or <QID> if label not found
-    '''
-    qids = pd.read_pickle("../Datasets/qids.pkl")
-    label = qids[qids.QID==QID]
-    if label.shape[0] == 0:
-        return QID
-    else:
-        return label.iloc[0]['Label']
 
 
 
