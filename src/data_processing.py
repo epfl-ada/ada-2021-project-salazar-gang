@@ -7,6 +7,7 @@ import json
 import bz2
 import pandas as pd
 import numpy as np
+from transformers import pipeline
 
 
 def keywords_search(keywords=None, df=None, save_mode=False, save_filename=None):
@@ -61,7 +62,7 @@ def keywords_search(keywords=None, df=None, save_mode=False, save_filename=None)
         global_mask = masks.any(axis=1)
         df = df[global_mask]
     if save_mode:
-        df.to_pickle(save_filename)
+        df.to_pickle("../Datasets/"++save_filename)
     print(f"Total time for keywords_search function: {round(time.time() - time_begin, 2)} sec")
     return df
 
@@ -124,7 +125,7 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
                             if date_of_birth is not None:
                                 for j in range(len(date_of_birth)):
                                     date_of_birth[j] = date_of_birth[j].replace('Z','').replace('T',' ').replace('+','')
-                                    if len(date_of_birth[j]) != 19:
+                                    if len(date_of_birth[j]) != 19 and len(date_of_birth[j]) != 20:
                                         warnings.warn(f"This error should not arise, check the code [invalid date of birth: {date_of_birth[j]}]")
                             df.iloc[i][speaker_col].append(date_of_birth)
                         elif speaker_col == 'speaker_age':
@@ -144,7 +145,10 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
                                         if abs((birth_datetime[0]-b).total_seconds()) > 320000000: invalid_birth = True
                                     if invalid_birth == False:
                                         try:
-                                            quote_datetime = datetime.datetime.strptime(df.iloc[i]['date'], '%Y-%m-%d %H:%M:%S')
+                                            if 'date' in df.columns:
+                                                quote_datetime = datetime.datetime.strptime(df.iloc[i]['date'], '%Y-%m-%d %H:%M:%S')
+                                            else:
+                                                quote_datetime = datetime.datetime.strptime('2015-04-01 00:00:00', '%Y-%m-%d %H:%M:%S') # ~ median date of the QuoteBank dataset
                                             age_seconds = 0.0
                                             for k in range(len(birth_datetime)):
                                                 age_seconds += (quote_datetime - birth_datetime[k]).total_seconds()/len(birth_datetime)
@@ -167,9 +171,232 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
                     else:
                         warnings.warn(f"This error should not arise, check the code [multiple speakers with same qid: {speaker['qid']}]")
     if save_mode:
-        df.to_pickle(save_filename)
+        df.to_pickle("../Datasets/"+save_filename)
     print(f"Total time for add_speakers_attributes function: {round(time.time() - time_begin, 2)} sec")
     return df
+
+
+def compute_sentiment_analysis(quotes, model_name="distilbert-base-uncased-finetuned-sst-2-english", classifier_parameters=[]):
+    '''
+    Computes sentiment analysis on quotes
+    :param quotes: [list] quotes
+    :param model_name: [str] model used (from huggingface)
+    :return: predictions from the model
+    '''
+    pd.options.mode.chained_assignment = None  # default='warn'
+    if model_name == "distilbert-base-uncased-finetuned-sst-2-english":
+        classifier = pipeline("text-classification", model=model_name, return_all_scores=True)
+    elif model_name == "bhadresh-savani/distilbert-base-uncased-emotion":
+        classifier = pipeline("text-classification", model=model_name, return_all_scores=True)
+    elif model_name == "facebook/bart-large-mnli":
+        classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+        if len(classifier_parameters) == 0: classifier_parameters = [['optimism', 'pessimism']]
+    else:
+        warnings.warn("Sentiment analysis model unknown !")
+        classifier = pipeline("text-classification", model=model_name, return_all_scores=True)
+
+    pred = classifier(["labels wanted !"], *classifier_parameters)
+    if type(pred[0]) is dict:
+        if pred[0].get('labels') != None:
+            pred = [[{'label': pred[0]['labels'][i], 'score': pred[0]['scores'][i]} for i in range(len(pred[0]['labels']))]]
+    labels = []
+    for l in range(len(pred[0])):
+        label = pred[0][l]['label']
+        labels.append(label)
+
+    prediction = []
+    for i in range(len(quotes)):
+        quote = quotes[i]
+        try:
+            pred = classifier([quote], *classifier_parameters)
+            if type(pred[0]) is dict:
+                if pred[0].get('labels') != None:
+                    pred = [[{'label': pred[0]['labels'][i], 'score': pred[0]['scores'][i]} for i in range(len(pred[0]['labels']))]]
+        except:
+            pred = [[]]
+            for label in labels:
+                pred[0].append({'label':label, 'score':np.nan})
+        prediction.append(pred[0])
+    return prediction
+
+
+def add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst-2-english", classifier_parameters=[], save_mode=False, save_filename=None):
+    '''
+
+    :param df:
+    :param model_name:
+    :param classifier_parameters:
+    :param save_mode:
+    :param save_filename:
+    :return:
+    '''
+    pd.options.mode.chained_assignment = None  # default='warn'
+    if os.path.isdir("sa_checkpoints") is False: os.mkdir("sa_checkpoints")
+
+    prediction = compute_sentiment_analysis(["labels wanted !"], model_name=model_name, classifier_parameters=classifier_parameters)
+    for l in range(len(prediction[0])):
+        label = "sa_" + prediction[0][l]['label'].lower()
+        df[label] = np.nan
+
+    t0 = time.time()
+    t_delta = t0
+    chunksize = 10000
+    for chunk in range(math.ceil(df.shape[0]/chunksize)):
+        min_bound = chunk*chunksize
+        max_bound = (chunk+1)*chunksize
+        if max_bound > df.shape[0]: max_bound = df.shape[0]
+        quotes = df.iloc[min_bound:max_bound]['quotation'].values
+        quotes = quotes.tolist()
+        prediction = compute_sentiment_analysis(quotes, model_name=model_name, classifier_parameters=classifier_parameters)
+        for q in range(len(prediction)):
+            for l in range(len(prediction[q])):
+                label = "sa_"+prediction[q][l]['label'].lower()
+                proba = prediction[q][l]['score']
+                df[label].iat[min_bound+q] = proba
+        print(f"Number of quotes processed with sentiment analysis: {max_bound}/{df.shape[0]} ({round(time.time()-t0,2)} sec)")
+        if save_mode and time.time()-t_delta>3600:
+            t_delta = time.time()
+            timestamp = str(datetime.datetime.now()).replace(' ', '_').replace(':', 'h')[:16]
+            df.to_pickle(f"../Datasets/sa_checkpoints/quotes_sa_checkpoint_{timestamp}.pkl")
+    if save_mode:
+        df.to_pickle("../Datasets/"+save_filename)
+    return df
+
+
+def get_quotes_per_speaker(keywords=None, debug=False, save_mode=False, save_filename=None):
+    pd.options.mode.chained_assignment = None  # default='warn'
+    if keywords is None:
+        keywords = {'climate change'}
+    # keywords = pd.DataFrame([list(keywords)])
+    keywords = list(keywords)
+    print(keywords)
+    if os.path.isdir("../Datasets") == False:
+        warnings.warn("The quotes can't be loaded ! The folder ../Datasets does not exist. None returned by keywords_search function.")
+        return None
+    speakers = pd.DataFrame(columns=['name', 'qids', 'n_all', 'n_climate'])
+    t0 = time.time()
+    for year in range(2008, 2021):
+        if os.path.isfile(f"../Datasets/quotes-{year}.json.bz2") == False:
+            warnings.warn(f"The quotes from {year} can't be loaded. The file ../Datasets/quotes-{year}.json.bz2 does not exist.")
+        else:
+            chunksize = 100000
+            df_reader = pd.read_json(f"../Datasets/quotes-{year}.json.bz2", compression='bz2', lines=True, chunksize=chunksize)
+            for df_chunk in df_reader:
+                df_chunk.loc[:,'name'] = df_chunk['probas'].map(lambda x: x[0][0])
+                speakers_chunk = df_chunk[['name','qids']]
+                speakers_chunk.loc[:,'name'] = speakers_chunk.loc[:,'name'].str.lower() # lower case speaker name for compatibility
+                climate_related = df_chunk.quotation.str.contains('|'.join(keywords),case=False).astype(int) # boolean (0,1) indicating if "climate change relating quote"
+                speakers_chunk.loc[:,'n_all'] = 1 - climate_related.values
+                speakers_chunk.loc[:,'n_climate'] = climate_related.values
+                speakers_chunk.loc[:, 'qids_str'] = speakers_chunk.loc[:, 'qids'].str.join(',') # qids as string for the groupby method
+
+                speakers = pd.concat([speakers,speakers_chunk])
+                speakers.loc[:,'n_all'] = speakers.groupby(['name'])['n_all'].transform('sum')
+                speakers.loc[:,'n_climate'] = speakers.groupby(['name'])['n_climate'].transform('sum')
+                speakers = speakers.drop_duplicates(subset=['name'])
+
+                if debug: print(f"Processed quotes: {speakers['n_all'].sum()+speakers['n_climate'].sum()} ({round(time.time()-t0,2)} sec)")
+
+                # print(speakers.shape,speakers['n_all'].sum(),speakers['n_climate'].sum())  # debugging line
+                # print(speakers[speakers.duplicated(subset=['name'])])  # debugging line
+                # print(speakers.iloc[0:20])  # debugging line
+    if save_mode:
+        speakers.to_pickle("../Datasets/"+save_filename)
+
+
+def find_qids(df):
+    if os.path.isfile("../Datasets/wikidata_labels_descriptions.csv.bz2") == False:
+        warnings.warn("../Datasets/wikidata_labels_descriptions.csv.bz2 does not exist !")
+        return None
+    t0 = time.time()
+    print("Loading of wikidata_labels_descriptions...")
+    QIDS = pd.read_csv("../Datasets/wikidata_labels_descriptions.csv.bz2", compression='bz2', on_bad_lines='warn')
+    print(f"Loading done ! ({round(time.time()-t0,2)} sec)")
+
+    # FIND USED QIDS
+    chunk = 20
+    QIDS_used = set()
+    t0 = time.time()
+    for i in range(0, df.shape[0], chunk):
+        df_str = df.iloc[i:i + chunk].to_string()
+        while df_str.find('Q') != -1:
+            qid = 'Q'
+            df_str = df_str[df_str.find('Q') + 1:]
+            begin = True
+            while df_str[0] in "0123456789":
+                if df_str[0]=='0' and begin:
+                    df_str = df_str[1:]
+                    continue
+                else:
+                    begin = False
+                    qid += df_str[0]
+                    df_str = df_str[1:]
+            if len(qid) > 1: QIDS_used.add(qid)
+        if (i + chunk) % 1000 == 0 or i + chunk > df.shape[0]: print(f"QIDS searching | Chunk {min(i + chunk, df.shape[0])}/{df.shape[0]}: {round(time.time() - t0, 2)} sec")
+        # if (i + chunk) % 10000 == 0: json.dump(list(QIDS_used), open("qids_used.txt", mode='w'))
+    # json.dump(list(QIDS_used), open("qids_used.txt", mode='w'))
+    print(f"Number of different QIDS used in df: {len(QIDS_used)}")
+
+    QIDS_useful = QIDS[QIDS['QID'].isin(list(QIDS_used))]
+    QIDS_useful = QIDS_useful.drop_duplicates(subset=['QID'], keep='first')
+    QIDS_useful.to_pickle("../Datasets/qids.pkl")
+
+
+def keep_only_first_speaker(df):
+    df = df[df['speaker_type'].str.len()==1]
+    return df
+
+
+def create_climate_quotes():
+    pd.options.mode.chained_assignment = None  # default='warn'
+    keywords = {"climate change", "global warming", "greenhouse effect", "greenhouse gas", "climate crisis", "climate emergency", "climate breakdown"}
+    try:
+        keywords_search(keywords=keywords, save_mode=True, save_filename="quotes1_keywords.pkl")
+        print("keywords_search: GOOD")
+    except:
+        print("keywords_search: ERROR")
+    try:
+        df = pd.read_pickle("../Datasets/quotes1_keywords.pkl")
+        add_speakers_attributes(df, save_mode=True, save_filename="quotes2_speakers.pkl")
+        print("add_speakers_attributes: GOOD")
+    except:
+        print("add_speakers_attributes: ERROR")
+    df = pd.read_pickle("../Datasets/quotes2_speakers.pkl")
+    find_qids(df)
+    try:
+        df = pd.read_pickle("../Datasets/quotes2_speakers.pkl")
+        add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst-2-english", save_mode=True, save_filename="quotes3_sa1.pkl")
+        print("add_sentiment_analysis (1): GOOD")
+    except:
+        print("add_sentiment_analysis (1): ERROR")
+    df = pd.read_pickle("../Datasets/quotes3_sa1.pkl")
+    df['sa_score'] = df[['sa_negative', 'sa_positive']].idxmax(axis=1).str[3:]
+    df.to_pickle("../Datasets/quotes3_sa1.pkl")
+    try:
+        df = pd.read_pickle("../Datasets/quotes3_sa1.pkl")
+        add_sentiment_analysis(df, model_name="bhadresh-savani/distilbert-base-uncased-emotion", save_mode=True, save_filename="quotes4_sa.pkl")
+        print("add_sentiment_analysis (2): GOOD")
+    except:
+        print("add_sentiment_analysis (2): ERROR")
+    df = pd.read_pickle("../Datasets/quotes4_sa.pkl")
+    df['sa_emotion'] = df[['sa_sadness', 'sa_joy', 'sa_love', 'sa_anger', 'sa_fear', 'sa_surprise']].idxmax(axis=1).str[3:]
+    df.to_pickle("../Datasets/quotes4_sa.pkl")
+
+    try:
+        get_quotes_per_speaker(keywords, debug=True, save_mode=True, save_filename="quotes_densities.pkl")
+        print("get_quotes_per_speaker: GOOD")
+    except:
+        print("get_quotes_per_speaker: ERROR")
+    try:
+        df = pd.read_pickle("../Datasets/quotes_densities.pkl")
+        add_speakers_attributes(df, save_mode=True, save_filename="quotes_densities_speakers.pkl")
+        print("add_speakers_attributes densities: GOOD")
+    except:
+        print("add_speakers_attributes densities: ERROR")
+
+
+
+
 
 
 
