@@ -102,6 +102,7 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
     for speaker_col in speaker_columns:
         df[speaker_col] = [[] for _ in range(df.shape[0])]
 
+    # chunk loading
     chunksize = 1000
     for chunk in range(math.ceil(df.shape[0]/chunksize)):
         min_bound = chunk*chunksize
@@ -114,6 +115,7 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
         speakers_mask = speakers['qid'].isin(qids_used)
         speakers_chunk = speakers[speakers_mask]
 
+        # add speaker attributes by iterating over all the attributes
         for i in range(min_bound, max_bound):
             if i % 1000 == 0: print(f"{i}/{df.shape[0]} quotes with speaker added | ({round(time.time() - time_begin, 2)} sec)")
             for qid in df.iloc[i]['qids']:
@@ -128,6 +130,7 @@ def add_speakers_attributes(df, save_mode=False, save_filename=None):
                                     if len(date_of_birth[j]) != 19 and len(date_of_birth[j]) != 20:
                                         warnings.warn(f"This error should not arise, check the code [invalid date of birth: {date_of_birth[j]}]")
                             df.iloc[i][speaker_col].append(date_of_birth)
+                        # age computation (quote date - birth date)
                         elif speaker_col == 'speaker_age':
                             date_of_birth = speaker['speaker_date_of_birth'].item()
                             if date_of_birth is None:
