@@ -222,13 +222,13 @@ def compute_sentiment_analysis(quotes, model_name="distilbert-base-uncased-finet
 
 def add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst-2-english", classifier_parameters=[], save_mode=False, save_filename=None):
     '''
-
-    :param df:
-    :param model_name:
-    :param classifier_parameters:
-    :param save_mode:
-    :param save_filename:
-    :return:
+    Add the sentiment analysis attributes to the DataFrame df provided and return the result.
+    :param df: [DataFrame] initial DataFrame with the quotes
+    :param model_name: [str] model name (from huggingface)
+    :param classifier_parameters: [list] optional parameters given to the classifier during its creation
+    :param save_mode: [bool] if True, the new computed df will be saved in save_filename
+    :param save_filename: filename used to save the newly computed df
+    :return: df with sentiment analysis data
     '''
     pd.options.mode.chained_assignment = None  # default='warn'
     if os.path.isdir("sa_checkpoints") is False: os.mkdir("sa_checkpoints")
@@ -264,6 +264,16 @@ def add_sentiment_analysis(df, model_name="distilbert-base-uncased-finetuned-sst
 
 
 def get_quotes_per_speaker(keywords=None, debug=False, save_mode=False, save_filename=None):
+    '''
+    This function iterates over the full dataset of QuoteBank and return the number of quotes for each speaker (total number of quotes and number of quotes about climate change)
+    :param keywords: [set] list of keywords used, these keywords are used to determine if a quote is about climate change or not
+    :param debug: [bool] debugging print
+    :param save_mode: [bool] if True, the new computed df will be saved in save_filename
+    :param save_filename: filename used to save the newly computed df
+    :return: [DataFrame] df containing the number of quotes of each speaker.
+                         'n_all' column contains the number of quotes not related to climate change
+                         'n_climate' column contains the number of quotes related to climate change (keyworded)
+    '''
     pd.options.mode.chained_assignment = None  # default='warn'
     if keywords is None:
         keywords = {'climate change'}
@@ -305,6 +315,11 @@ def get_quotes_per_speaker(keywords=None, debug=False, save_mode=False, save_fil
 
 
 def find_qids(df):
+    '''
+    This function loads all the QIDS from wikidata datasets (downloaded before) and reduce this dataset to the only QIDS present in df.
+    :param df: [DataFrame] this dataframe will be used to reduce the QIDS list. Every QID present is df will be kept, others will be deleted
+    :return: df containing the relevant qids for df
+    '''
     if os.path.isfile("../Datasets/wikidata_labels_descriptions.csv.bz2") == False:
         warnings.warn("../Datasets/wikidata_labels_descriptions.csv.bz2 does not exist !")
         return None
@@ -333,8 +348,6 @@ def find_qids(df):
                     df_str = df_str[1:]
             if len(qid) > 1: QIDS_used.add(qid)
         if (i + chunk) % 1000 == 0 or i + chunk > df.shape[0]: print(f"QIDS searching | Chunk {min(i + chunk, df.shape[0])}/{df.shape[0]}: {round(time.time() - t0, 2)} sec")
-        # if (i + chunk) % 10000 == 0: json.dump(list(QIDS_used), open("qids_used.txt", mode='w'))
-    # json.dump(list(QIDS_used), open("qids_used.txt", mode='w'))
     print(f"Number of different QIDS used in df: {len(QIDS_used)}")
 
     QIDS_useful = QIDS[QIDS['QID'].isin(list(QIDS_used))]
@@ -343,6 +356,15 @@ def find_qids(df):
 
 
 def create_climate_quotes():
+    '''
+    Main function for the loading and preprocessing of the data.
+    This function load the data, modify them and perform operations on the DataFrames in order to prepare them for further analysis.
+    The data are loaded from QuoteBank, quotes about climate are extracted (keywords search), the speaker attributes are added and the sentiment analysis attributes are added.
+    The number of quotes for each speaker are also computed here.
+    The QIDS are also computed here.
+    All the data created in this function are saved in the folder ../Datasets/
+    :return:
+    '''
     pd.options.mode.chained_assignment = None  # default='warn'
     keywords = {"climate change", "global warming", "greenhouse effect", "greenhouse gas", "climate crisis", "climate emergency", "climate breakdown"}
     try:
@@ -393,6 +415,7 @@ def create_climate_quotes():
 def sentiment_analysis_topic_classification():
     '''
     This function is used to perform topic classification on the quotes. It has been used for tests but it's unfortunately not implemeneted in the main notebook.
+    This function classify quotations with labels ["pessimism","optimism"] and labels ["conservative","progressive"]
     '''
     try:
         df = pd.read_pickle("../Datasets/quotes-climate_v2.pkl")
