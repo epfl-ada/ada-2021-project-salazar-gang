@@ -390,6 +390,9 @@ def create_climate_quotes():
         print("add_speakers_attributes densities: ERROR")
 
 
+if __name__ =='__main__':
+    create_climate_quotes()
+
 
 
 
