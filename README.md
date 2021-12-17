@@ -15,6 +15,12 @@ Some of the papers and articles that we have read to define these questions and 
     - [The Politics of Climate](https://www.pewresearch.org/internet/wp-content/uploads/sites/9/2016/10/PS_2016.10.04_Politics-of-Climate_FINAL.pdf)<br />
     - [Democratic and Republican Views of Climate Change (2018)](https://climatecommunication.yale.edu/visualizations-data/partisan-maps-2018/)<br />
 
+# Repository organisation
+- [`Datasets`](Datasets) folder: contains all files with the data used for the project.
+- [`html`](Datasets) folder: contains all the html files of the plotly visualisations used in the [data story](https://glpittet.github.io/salazar-gang.github.io/).
+- [`src`](src) folder: contains the loading, processing and sentiment analysis functions of the data.
+- [`working_draft.ipynb`](working_draft.ipynb): main notebook of the project.
+
 # Proposed additional datasets
 [**Wikidata knowledge base**](https://www.wikidata.org/wiki/Wikidata:Main_Page)
 <p align= "justify"> Wikidata dumps (wikipedia) are used in order to retrieve some attributes about the speakers. These attributes are found by their corresponding PID (property ID) in the data. We fetch and add these attributes to the quotations data in order to perform further analysis. Speaker occupation, academic degree and birth date are some examples of attributes that we will use.</p>
@@ -44,7 +50,6 @@ Topic classification using machine learning methods is not useful for us because
 
 **Quotebank and wikidata:**<br />
 <p align= "justify"> The personal informations about the speakers are essential to perform statistical anaylsis. Thus, the important informations such as the the nationality, the gender, etc... are retrieved by processing wikidata and added to the quotebank DataFrame depending on the speaker's QID of each quote. The age of the speaker is calculated by substracting the quotation date with the birth date.</p>
-
 
 # Proposed timeline and internal milestones
 |**Week**|**Task**|**Members involved**|
