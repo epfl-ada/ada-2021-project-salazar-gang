@@ -8,7 +8,6 @@ import bz2
 import pandas as pd
 import numpy as np
 from transformers import pipeline
-from print_overloading import save_print
 
 
 def keywords_search(keywords=None, df=None, save_mode=False, save_filename=None):
@@ -410,6 +409,7 @@ def sentiment_analysis_topic_classification():
 
 
 if __name__ =='__main__':
+    from print_overloading import save_print
     save_print()
     create_climate_quotes()
 
