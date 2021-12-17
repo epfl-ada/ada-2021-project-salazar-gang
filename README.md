@@ -54,6 +54,7 @@ Topic classification using machine learning methods is not useful for us because
     
 The 2 last models (for emotions labeling and topic classification) are not used in the final notebook but have been tested. The topic classification model (facebook/bart-large-mnli) can not be used for complex analysis because it is very long to run and it would take too much time to run it on the whole dataset.
 </p>
+
 **Quotebank and wikidata:**<br />
 <p align= "justify"> The personal informations about the speakers are essential to perform statistical anaylsis. Thus, the important informations such as the the nationality, the gender, etc... are retrieved by processing wikidata and added to the quotebank DataFrame depending on the speaker's QID of each quote. The age of the speaker is calculated by substracting the quotation date with the birth date.</p>
 
