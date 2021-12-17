@@ -47,9 +47,11 @@ Topic classification using machine learning methods is not useful for us because
 
 **Sentiment analysis:**<br />
 <p align= "justify"> Once the dataset is sorted out, we are interested to see whether the quotes are positive or negative about climate change. This method will lead hopefuly to a better interpretation of the perception of climate change by the speakers. There are multiple pre-trained sentiment analysis model that are available on https://huggingface.co/ and we will need to test them to achieve the best possible accuracy. We think that sentiment analysis on such negative topic like climate change will probably fail to determine the opinion of the speaker about this kind of topic but we will still give it a try. The models tried are the following:
+    
 - distilbert-base-uncased-finetuned-sst-2-english (used to label quotes as 'positive' and 'nefative')
 - bhadresh-savani/distilbert-base-uncased-emotion (used to label quotes with emotions as 'joy', 'anger',...)
 - facebook/bart-large-mnli (topic classification)
+    
 The 2 last models (for emotions labeling and topic classification) are not used in the final notebook but have been tested.
 </p>
 **Quotebank and wikidata:**<br />
