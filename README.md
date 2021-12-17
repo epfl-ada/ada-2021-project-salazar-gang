@@ -17,9 +17,9 @@ Some of the papers and articles that we have read to define these questions and 
 
 # Repository organisation
 - [`Datasets`](Datasets) folder: contains all files with the data used for the project.
-- [`html`](Datasets) folder: contains all the html files of the plotly visualisations used in the [data story](https://glpittet.github.io/salazar-gang.github.io/).
+- [`html`](html) folder: contains all the html files of the plotly visualisations used in the [data story](https://glpittet.github.io/salazar-gang.github.io/).
 - [`src`](src) folder: contains the loading, processing and sentiment analysis functions of the data.
-- [`working_draft.ipynb`](working_draft.ipynb): main notebook of the project.
+- [`analysis.ipynb`](analysis.ipynb): main notebook of the project.
 
 # Proposed additional datasets
 [**Wikidata knowledge base**](https://www.wikidata.org/wiki/Wikidata:Main_Page)
