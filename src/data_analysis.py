@@ -17,8 +17,8 @@ def find_keywords_in_label(df, label="speaker_occupation", keywords=['researcher
     :return: DataFrame where df[label] contains (at least) one keyword
     '''
     if type(keywords) is not list: keywords = [keywords]
-    if os.path.isfile("Datasets/qids.pkl"):
-        qids = pd.read_pickle("Datasets/qids.pkl")
+    if os.path.isfile("../Datasets/qids.pkl"):
+        qids = pd.read_pickle("../Datasets/qids.pkl")
     else:
         warnings.warn("../Datasets/qids.pkl does not exist !")
         return None
